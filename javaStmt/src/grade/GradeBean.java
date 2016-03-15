@@ -1,4 +1,5 @@
 package grade;
+
 /**
  * @file GradeBean.java
  * @author CSY
@@ -8,14 +9,13 @@ package grade;
 public class GradeBean {
 	private String name;
 	private int hak, java, sql, jsp, spring;
-	
-	
-	//생성자 오버로딩
+
+	// 생성자 오버로딩
 	public GradeBean() {
-	
+
 	}
-	
-	public GradeBean(int hak,String name,int java, int sql, int jsp , int spring) {
+
+	public GradeBean(int hak, String name, int java, int sql, int jsp, int spring) {
 		this.name = name;
 		this.hak = hak;
 		this.java = java;
@@ -23,6 +23,7 @@ public class GradeBean {
 		this.jsp = jsp;
 		this.spring = spring;
 	}
+
 	public int getHak() {
 		return hak;
 	}
@@ -73,7 +74,7 @@ public class GradeBean {
 
 	@Override
 	public String toString() {
-		return "성적 [이름=" + name + ", 학점=" + hak + ", 자바=" + java + ", SQL=" + sql + ", JSP=" + jsp
-				+ ", 스프링=" + spring + "]";
+		return "성적 [이름=" + name + ", 학점=" + hak + ", 자바=" + java + ", SQL=" + sql + ", JSP=" + jsp + ", 스프링=" + spring
+				+ "]";
 	}
 }
