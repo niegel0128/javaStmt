@@ -8,7 +8,7 @@ public class GradeBean {
 	public GradeBean() {
 	
 	}
-	//0315
+	//0315 15316
 	public GradeBean(String name,int hak,int java,int sql,int jsp, int spring) {
 		this.name = name;
 		this.hak = hak;
