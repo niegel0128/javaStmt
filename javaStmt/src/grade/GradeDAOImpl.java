@@ -1,5 +1,5 @@
 package grade;
 
-public class GradeDAOImpl implements GradeDAO {
+public class GradeDAOImpl implements GradeDAO{
 
 }

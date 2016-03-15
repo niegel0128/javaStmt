@@ -1,27 +1,36 @@
 package grade;
+
+import java.util.Vector;
+
 /**
- * CRUD
- * C : create 생성
- * R : read 조회
- * U : update 수정
- * D : delete 삭제
+ * CRUD 
+ *  C : Create 생성
+ *  R : Read   조회
+ *  U : Update 수정
+ *  D : Delete 삭제
+ *@package : grade
+ *@file : GradeService.java
+ *@author sdwoo90@gmail.com
+ *@date 2016. 3. 14.
+ *@story 속성은 감추고 기능은 오픈한다.
  */
 public interface GradeService {
-	// C 성적표 등록
-	public void input(); //추상 메소드 기능은 (추상화/속성은 추상화안함)
-	// R 성적표 리스트 출력
-	public void getList();
-	// R 성적표 조회(학번)
-	public void getGradeByHak();
-	// R 성적표 조회(이름)
+	// 성적표 등록  C
+	public void input(GradeBean gradeBean); //기능은 추상화하고 속성은 추상화하지 않는다.
+	// 성적표 리스트 출력 R
+	public Vector<GradeBean> getList();
+	// 성적표 조회(학번) R
+	public GradeBean getGradeByHak(int hak);
+	// 성적표 조회(이름) R
 	public void getGradesByName();
-	// R 카운트 조회
-	public void getCount();
-	// R 이름 조회시 카운트 조회
-	public void getCountByName();
-	// U 성적표 수정
+	// 성적표 수정 U
 	public void update();
-	// D 성적표 삭제
-	public void delete();
+	// 성적표 삭제 D
+	public GradeBean delete(int hak);
+	// R 카운트 조회
+	public int getCount();
+	// R 이름조회시 카운트 조회
+	public void getCountByName();
+	
 	
 }
