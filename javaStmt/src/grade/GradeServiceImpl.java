@@ -1,130 +1,96 @@
 package grade;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.ArrayList;
 
-public class GradeServiceImpl implements GradeService {
-	/*
-	 * private String name; private int hak, java, sql, jsp, spring;
-	 */
-
+public class GradeServiceImpl implements GradeService{
 	// 멤버 필드
-	// 속성을 모아놓은곳 (Bean)
-	private ArrayList<GradeBean> gradeList;
-
-	// ArrayList<GradeBean> gradeList = new ArrayList<GradeBean>(); //인스턴스변수
+	ArrayList<GradeBean> gradeList;
+	
 	public GradeServiceImpl() {
-		gradeList = new ArrayList<GradeBean>(); // 인스턴스 변수 초기화
+		gradeList = new ArrayList<GradeBean>(); // 초기화
 	}
-	// 메서드 내부에 위치하면 참조변수(공유를 안하므로)
 	// 멤버 메소드 에어리어
-	// 기능을 모아놓은곳(Service)
-
 	@Override
-	public void input(GradeBean gradeBean) {
-		// 성적표 등록 C
-		gradeList.add(new GradeBean(2, "김유신", 100, 100, 100, 100));
-		gradeList.add(new GradeBean(3, "이유신", 90, 90, 90, 90));
-		gradeList.add(new GradeBean(4, "박유신", 80, 80, 80, 80));
-		gradeList.add(new GradeBean(5, "우유신", 700, 70, 70, 70));
-		gradeList.add(new GradeBean(6, "유유신", 60, 60, 60, 60));
-		gradeList.add(new GradeBean(7, "조유신", 50, 50, 50, 50));
-		gradeList.add(gradeBean);
+	public void input(GradeBean grade) {
+		// 성적표 등록 
+		gradeList.add(new GradeBean(2,"김구",100,100,100,100));
+		gradeList.add(new GradeBean(3,"강감찬",90,90,90,90));
+		gradeList.add(new GradeBean(4,"유관순",80,80,80,80));
+		gradeList.add(new GradeBean(5,"김구",70,70,70,70));
+		gradeList.add(grade);
 	}
 
 	@Override
 	public ArrayList<GradeBean> getList() {
-		// 성적표 리스트 출력 R
-
+		// 성적표 리스트 출력
 		return gradeList;
-
 	}
 
 	@Override
 	public GradeBean getGradeByHak(int hak) {
-		// 성적표 조회(학번) R
-		GradeBean tempBean = new GradeBean();
-		// 모든 데이터를 넘길수 없으므로 하나의 객체를 생성하여
-		// 요구하는 객체의 정보만 넘긴다.
-
+		// 성적표 조회(학번)
+	
+		GradeBean tempGrade = new GradeBean();
 		for (int i = 0; i < gradeList.size(); i++) {
-
-			System.out.println(gradeList.get(i).getHak());
-
-			if (gradeList.get(i).getHak() == hak) {
-				tempBean.setHak(gradeList.get(i).getHak());
-				tempBean.setName(gradeList.get(i).getName());
-				tempBean.setJava(gradeList.get(i).getJava());
-				tempBean.setJsp(gradeList.get(i).getJsp());
-				tempBean.setSql(gradeList.get(i).getSql());
-				tempBean.setSpring(gradeList.get(i).getSpring());
+			// arr[i]
+			int searchHak = gradeList.get(i).getHak();
+			if (hak == searchHak) {
+				tempGrade = gradeList.get(i);
 				break;
-			} else {
-				tempBean.setName("결과없음");
-			}
-
+			} 
 		}
-		return tempBean;
-
+		return tempGrade;
 	}
 
 	@Override
 	public ArrayList<GradeBean> getGradesByName(String name) {
-		// 성적표 조회(이름) R
+		// 성적표 조회(이름)
 		ArrayList<GradeBean> tempList = new ArrayList<GradeBean>();
 		for (int i = 0; i < gradeList.size(); i++) {
 			if (name.equals(gradeList.get(i).getName())) {
 				tempList.add(gradeList.get(i));
-
 			}
-
 		}
-
 		return tempList;
+		
 	}
 
 	@Override
 	public String update(GradeBean grade) {
-		// 성적표 수정 U
-		String temp = "";
-		GradeBean searchedGrade = getGradeByHak(grade.getHak());
-		searchedGrade.setJava(grade.getJava());
-		searchedGrade.setJava(grade.getSql());
-		searchedGrade.setJava(grade.getJsp());
-		searchedGrade.setJava(grade.getSpring());
-		temp = "수정성공";
-
+		// 성적표 수정
+		String result = "수정하려는 학번이 존재하지 않음";
+		if (gradeList.contains(getGradeByHak(grade.getHak()))) {
+			GradeBean searchedGrade = getGradeByHak(grade.getHak());
+			searchedGrade.setJava(grade.getJava());
+			searchedGrade.setSql(grade.getSql());
+			searchedGrade.setJsp(grade.getJsp());
+			searchedGrade.setSpring(grade.getSpring());
+			result = "수정 성공";
+		}
 		/*
-		 * this.delete(grade.getHak()); this.input(grade);
-		 */
-		return temp;
+		this.delete(grade.getHak());
+		this.input(grade);
+		*/
+		return result;
 	}
 
 	@Override
-	public GradeBean delete(int hak) {
-		// 성적표 삭제 D
-		String temp = "";
-		for (int i = 0; i < gradeList.size(); i++) {
-			if (gradeList.get(i).getHak() == hak) {
-				gradeList.remove(i);
-			}
-
-		}
-		return null;
-
+	public String delete(int hak) {
+		// 성적표 삭제
+		return (gradeList.remove(getGradeByHak(hak))) ? "삭제 성공" : "삭제 실패";
 	}
 
 	@Override
 	public int getCount() {
-		// R 카운트 조회
-
+		// 카운트 조회
 		return gradeList.size();
-
 	}
 
 	@Override
 	public void getCountByName() {
-		// R 이름조회시 카운트 조회
-
+		// 이름조회시 카운트 조회
+		
 	}
 
 }
